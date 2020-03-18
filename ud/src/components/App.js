@@ -3,6 +3,8 @@ import axios from "axios";
 import { Route, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Home from "./Home";
+import ListItems from "./ListItems";
+import Item from "./Item"
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -13,8 +15,6 @@ function App() {
       .then(res => setItems(res.data))
       .catch(err => console.log("error", err));
   }, []);
-
-  console.log("This is items", items);
   //   first react read the app as whole and then update with the states if there is an update
 
   const AppDiv = styled.div`
@@ -53,6 +53,7 @@ function App() {
     }
   `;
 
+
   return (
     <AppDiv>
       <Nav>
@@ -69,6 +70,13 @@ function App() {
       </Nav>
 
       <Route exact path="/" component={Home} />
+      <Route
+        exact
+        path="/item-list"
+        render={props => <ListItems {...props} items={items} />}
+      />
+      <Route exact path="/item-list/:id" render={props => <Item {...props} items={items} />} />
+
     </AppDiv>
   );
 }

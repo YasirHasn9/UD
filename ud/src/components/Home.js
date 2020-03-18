@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-function Home() {
+function Home(props) {
+  const routeShop = e => {
+    e.preventDefault();
+    props.history.push("/item-list");
+  };
   const HomeWrapper = styled.div`
     display: flex;
     flex-flow: column nowrap;
@@ -13,22 +17,25 @@ function Home() {
   `;
 
   const Button = styled.button`
-    margin-top: -16px;
-    width: 115px;
+    margin-top: -39px;
+    width: 215px;
+    height: 40px;
+    border-radius: 25px;
+    transition: all 0.3s;
+    font-size: 1.2rem;
+    &:hover {
+      background: yellow;
+      color: #1c5d76;
+      border: 2px solid #1c5d76;
+    }
   `;
-  /*
-.shop-button.md-button {
-  margin-top: -16px;
-  width: 115px;
-}
-    */
   return (
     <HomeWrapper>
       <HomeImage
         src="https://www.uncommongoods.com/images/category/fun-fullwidth.jpg"
         alt="home-image"
       />
-      <Button>Shop now!</Button>
+      <Button onClick={routeShop}>Shop now!</Button>
     </HomeWrapper>
   );
 }
