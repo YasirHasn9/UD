@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Home from "./Home";
 import ListItems from "./ListItems";
 import Item from "./Item";
-import ItemShipping from "./ItemShipping";
+import UpdateItem from "./UpdateItem";
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -78,7 +78,15 @@ function App() {
       <Route
         exact
         path="/item-list/:id"
-        render={props => <Item {...props} items={items} />}
+        render={props => <Item {...props} items={items} setItems={setItems} />}
+      />
+
+      <Route
+        exact
+        path="/update-item/:id"
+        render={props => (
+          <UpdateItem items={items} {...props} setItems={setItems} />
+        )}
       />
     </AppDiv>
   );

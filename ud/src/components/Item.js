@@ -4,6 +4,8 @@ import styled from "styled-components";
 import ItemDescription from "./ItemDescription";
 import ItemShipping from "./ItemShipping";
 
+import axios from "axios";
+
 function Item(props) {
   const [showShipping, setShowShipping] = React.useState(false);
   const [showStory, setShowStory] = React.useState(false);
@@ -22,6 +24,17 @@ function Item(props) {
 
   let item = props.items.find(item => `${item.id}` === props.match.params.id);
 
+  const deleteItem = e => {
+    e.preventDefault();
+    axios
+      .delete(`http://localhost:3333/items/${item.id}`)
+      .then(res => {
+        console.log(res);
+        props.setItems(res.data);
+        props.history.push("/item-list");
+      })
+      .catch(err => console.log(err));
+  };
   if (!props.match.params.id || !item) {
     return <p>Loading ...</p>;
   }
@@ -46,23 +59,6 @@ function Item(props) {
     flex-flow: column nowrap;
     align-items: flex-start;
   `;
-
-  //   const ItemSubNav = styled.nav`
-  //     border-bottom: 1px solid #a1d5d4;
-  //     justify-content: center;
-  //     a {
-  //       color: #a5a5a5;
-  //       text-decoration: none;
-  //       padding: 12px;
-  //       &:active {
-  //         color: #1c5d76;
-  //         font-weight: bold;
-  //       }
-  //       &:first-of-type {
-  //         margin-right: 32px;
-  //       }
-  //     }
-  //   `;
   const ItemSubNav = styled.nav`
     border-bottom: 1px solid #a1d5d4;
     justify-content: center;
@@ -96,6 +92,15 @@ function Item(props) {
 
       {showShipping && <p>{item.shipping}</p>}
       {showStory && <p>{item.description}</p>}
+
+      {showStory ? (
+        <div>
+          <button onClick={deleteItem}>Delete</button>
+          <button onClick={() => props.history.push(`/update-item/${item.id}`)}>
+            Edit
+          </button>
+        </div>
+      ) : null}
     </ItemWrapper>
   );
 }
