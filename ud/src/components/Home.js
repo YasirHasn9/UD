@@ -24,9 +24,8 @@ function Home(props) {
     transition: all 0.3s;
     font-size: 1.2rem;
     &:hover {
-      background: yellow;
-      color: #1c5d76;
-      border: 2px solid #1c5d76;
+      background: #1c5d76;
+      color: #fff;
     }
   `;
   return (

@@ -36,20 +36,30 @@ function App() {
 
   const H1 = styled.h1`
     color: #1c5d76;
+    margin-left: 50px;
   `;
   const NavLinks = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-right: 30px;
+    width: 30%;
     a {
       text-decoration: none;
+      padding: 10px 20px;
       color: #1c5d76;
       font-weight: bold;
       margin-right: 8px;
+      transition: all 0.3s;
+      border-radius: 10px;
       &:last-of-type {
         margin-right: 0;
       }
       &:active {
         border-bottom: 1px solid #1c5d76;
+      }
+      &:hover {
+        background: #1c5d76;
+        color: #fff;
       }
     }
   `;
